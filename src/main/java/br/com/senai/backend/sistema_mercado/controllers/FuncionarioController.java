@@ -17,7 +17,7 @@ import br.com.senai.backend.sistema_mercado.services.FuncionarioServices;
 
 
 @RestController
-@RequestMapping ("/Funcionario")
+@RequestMapping ("/funcionario")
 public class FuncionarioController {
 
 @Autowired
@@ -36,7 +36,7 @@ private FuncionarioServices funcionarioServices;
     }
 
     // Get - LISTAR TODOS
-    @GetMapping("/Listar Todos")
+    @GetMapping("/listar-todos")
     public List<Funcionario> listarTodos(){
         return funcionarioServices.listarTodos();
     }

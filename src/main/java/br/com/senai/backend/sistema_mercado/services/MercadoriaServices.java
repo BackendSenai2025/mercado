@@ -19,9 +19,15 @@ public class MercadoriaServices {
     }
 
     public Mercadoria atualizar(Integer id, Mercadoria mercadoria) {
-        mercadoria.setId(id);
+        Mercadoria merc = mercadoriaRepository.findById(id).get();
+        if(merc != null){
+        mercadoria.setId(merc.getId());
         return mercadoriaRepository.save(mercadoria);
+        }
+        return null;
     }
+    //mercadoria.setId(id);
+    //return mercadoriaRepository.save(mercadoria);
     
     public boolean existe(Integer id) {
         return mercadoriaRepository.existsById(id);
@@ -35,7 +41,15 @@ public class MercadoriaServices {
         return mercadoriaRepository.findById(id).get();
     }
 
-     public void remover(Integer id) { // Metodo para remover um carro pelo id
-    mercadoriaRepository.deleteById(id); // delete from carro where id = ?
+    public boolean removerPorId(Integer id){
+        Mercadoria merc = mercadoriaRepository.findById(id).get();
+        if (merc != null) {
+            mercadoriaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+    //public void remover(Integer id) { // Metodo para remover um carro pelo id
+    //mercadoriaRepository.deleteById(id); // delete from carro where id = ?
+    //}
 }

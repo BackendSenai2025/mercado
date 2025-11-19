@@ -3,7 +3,6 @@ package br.com.senai.backend.sistema_mercado.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,34 +23,35 @@ public class FuncionarioController {
 @Autowired
 private FuncionarioServices funcionarioServices;
 
-@PostMapping("/Salvar")
-public Funcionario salvar(@RequestBody Funcionario funcionario){
-    return funcionarioServices.cadastrar(funcionario);       
-}
-
-// PUT - Atualizar
-@PutMapping("/Atualizar{id}")
-    public ResponseEntity<Funcionario> atualizar(@PathVariable Integer id, @RequestBody Funcionario funcionario) {
-        if (!funcionarioServices.existe(id)){
-             return ResponseEntity.notFound().build();
-        }
-        Funcionario atualizado = funcionarioServices.atualizar(id, funcionario);
-        return ResponseEntity.ok(atualizado);
+    // Salvar
+    @PostMapping("/salvar")
+    public Funcionario salvar(@RequestBody Funcionario funcionario){
+        return funcionarioServices.cadastrar(funcionario);
     }
-// Get - LISTAR TODOS
-@GetMapping("/Listar Todos")
-public List<Funcionario> listarTodos(){
-    return funcionarioServices.listarTodos();
-}
 
-@GetMapping("/{id}")
-public Funcionario buscarPorId(@PathVariable Integer id) {
+    // PUT - Atualizar
+    @PutMapping("/atualizar/{id}")
+    public Funcionario atualizar(@PathVariable Integer id, @RequestBody Funcionario funcionario){
+        return funcionarioServices.atualizar(id, funcionario);
+    }
+
+    // Get - LISTAR TODOS
+    @GetMapping("/Listar Todos")
+    public List<Funcionario> listarTodos(){
+        return funcionarioServices.listarTodos();
+    }
+
+     @GetMapping("/recuperar-por-id/{id}")
+    public Funcionario recuperarPorId(@PathVariable Integer id) {
         return funcionarioServices.recuperarPorId(id);
-}
-// Delete - REMOVER
-@DeleteMapping("/Delete{id}")
-public void remover(@PathVariable Integer id){
-    funcionarioServices.remover(id);
-} 
-    
+    }
+
+        // Delete - REMOVER
+    @DeleteMapping("/delete{id}")
+    public String removerPorId(@PathVariable Integer id){
+        if(funcionarioServices.removerPorId(id)){
+            return "Funcionario removido com sucesso!";
+        }
+        return "Falha ao remover funcionario.";
+    } 
 }

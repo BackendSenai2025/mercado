@@ -17,10 +17,18 @@ public class FuncionarioServices {
      public Funcionario cadastrar(Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }
+
+    
     public Funcionario atualizar(Integer id, Funcionario funcionario) {
-        funcionario.setId(id);
+        Funcionario func = funcionarioRepository.findById(id).get();
+        if(func != null){
+        funcionario.setId(func.getId());
         return funcionarioRepository.save(funcionario);
+        }
+        return null;
     }
+        //funcionario.setId(id);
+        //return funcionarioRepository.save(funcionario);
     
     public boolean existe(Integer id) {
         return funcionarioRepository.existsById(id);
@@ -33,7 +41,15 @@ public class FuncionarioServices {
     public Funcionario recuperarPorId (Integer id){
         return funcionarioRepository.findById(id).get();
     }
-    public void remover(Integer id) { // Metodo para remover  pelo id
-    funcionarioRepository.deleteById(id); // delete from  where id = ?
+    public boolean removerPorId(Integer id){
+        Funcionario func = funcionarioRepository.findById(id).get();
+        if (func != null) {
+            funcionarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+    //public void remover(Integer id) { // Metodo para remover um carro pelo id
+    //funcionarioRepository.deleteById(id); // delete from carro where id = ?
+    //}
 }

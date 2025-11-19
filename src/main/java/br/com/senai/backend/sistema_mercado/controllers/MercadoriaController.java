@@ -3,7 +3,6 @@ package br.com.senai.backend.sistema_mercado.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,25 +17,22 @@ import br.com.senai.backend.sistema_mercado.services.MercadoriaServices;
 
 
 @RestController
-@RequestMapping("/Mercadoria")
+@RequestMapping("/mercadoria")
 public class MercadoriaController {
 
     @Autowired
     private MercadoriaServices mercadoriaServices;
 
-    @PostMapping("/Salvar")
+    // Salvar
+    @PostMapping("/salvar")
     public Mercadoria salvar(@RequestBody Mercadoria mercadoria){
         return mercadoriaServices.cadastrar(mercadoria);
     }
 
     // PUT - Atualizar
-    @PutMapping("/Atualizar{id}")
-    public ResponseEntity<Mercadoria> atualizar(@PathVariable Integer id, @RequestBody Mercadoria mercadoria) {
-        if (!mercadoriaServices.existe(id)){
-             return ResponseEntity.notFound().build();
-        }
-        Mercadoria atualizado = mercadoriaServices.atualizar(id, mercadoria);
-        return ResponseEntity.ok(atualizado);
+    @PutMapping("/atualizar/{id}")
+    public Mercadoria atualizar(@PathVariable Integer id, @RequestBody Mercadoria mercadoria){
+        return mercadoriaServices.atualizar(id, mercadoria);
     }
 
     // Get - LISTAR TODOS
@@ -45,14 +41,17 @@ public class MercadoriaController {
         return mercadoriaServices.listarTodos();
     }
 
-     @GetMapping("/{id}")
-    public Mercadoria buscarPorId(@PathVariable Integer id) {
+     @GetMapping("/recuperar-por-id/{id}")
+    public Mercadoria recuperarPorId(@PathVariable Integer id) {
         return mercadoriaServices.recuperarPorId(id);
     }
 
         // Delete - REMOVER
-    @DeleteMapping("/Delete{id}")
-    public void remover(@PathVariable Integer id){
-        mercadoriaServices.remover(id);
+    @DeleteMapping("/delete{id}")
+    public String removerPorId(@PathVariable Integer id){
+        if(mercadoriaServices.removerPorId(id)){
+            return "Mercadoria removida com sucesso!";
+        }
+        return "Falha ao remover mercadoria.";
     } 
 }

@@ -34,8 +34,8 @@ public class FuncionarioServices {
         return funcionarioRepository.existsById(id);
     }
     
-    public List<Funcionario> listarTodos() {  // Metodo para listar todos os carros
-        return funcionarioRepository.findAll(); // select * from carro
+    public List<Funcionario> listarTodos() {  
+        return funcionarioRepository.findAll(); 
     }
 
     public Funcionario recuperarPorId (Integer id){

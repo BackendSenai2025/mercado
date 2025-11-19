@@ -33,8 +33,8 @@ public class MercadoriaServices {
         return mercadoriaRepository.existsById(id);
     }
 
-    public List<Mercadoria> listarTodos() {  // Metodo para listar todos os carros
-        return mercadoriaRepository.findAll(); // select * from carro
+    public List<Mercadoria> listarTodos() {  
+        return mercadoriaRepository.findAll(); 
     }
 
     public Mercadoria recuperarPorId(Integer id){

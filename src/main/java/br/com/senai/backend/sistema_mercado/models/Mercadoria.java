@@ -16,14 +16,14 @@ public class Mercadoria {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "nome")
+    private String nome;
+
     @Column(name = "preco")
     private double preco;
 
     @Column(name = "quantidade")
     private int quantidade;
-
-    @Column(name = "nome")
-    private String nome;
 
     @Column(name = "categoria")
     private String categoria;

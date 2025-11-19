@@ -18,6 +18,15 @@ public class MercadoriaServices {
         return mercadoriaRepository.save(mercadoria);
     }
 
+    public Mercadoria atualizar(Integer id, Mercadoria mercadoria) {
+        mercadoria.setId(id);
+        return mercadoriaRepository.save(mercadoria);
+    }
+    
+    public boolean existe(Integer id) {
+        return mercadoriaRepository.existsById(id);
+    }
+
     public List<Mercadoria> listarTodos() {  // Metodo para listar todos os carros
         return mercadoriaRepository.findAll(); // select * from carro
     }

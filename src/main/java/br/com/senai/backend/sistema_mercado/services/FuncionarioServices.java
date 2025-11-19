@@ -17,7 +17,15 @@ public class FuncionarioServices {
      public Funcionario cadastrar(Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }
-
+    public Funcionario atualizar(Integer id, Funcionario funcionario) {
+        funcionario.setId(id);
+        return funcionarioRepository.save(funcionario);
+    }
+    
+    public boolean existe(Integer id) {
+        return funcionarioRepository.existsById(id);
+    }
+    
     public List<Funcionario> listarTodos() {  // Metodo para listar todos os carros
         return funcionarioRepository.findAll(); // select * from carro
     }

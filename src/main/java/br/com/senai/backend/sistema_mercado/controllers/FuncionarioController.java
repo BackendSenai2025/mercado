@@ -26,9 +26,18 @@ private FuncionarioServices funcionarioServices;
 
 @PostMapping("/Salvar")
 public Funcionario salvar(@RequestBody Funcionario funcionario){
-    return funcionarioServices.cadastrar(funcionario);
-        
+    return funcionarioServices.cadastrar(funcionario);       
 }
+
+// PUT - Atualizar
+@PutMapping("/Atualizar{id}")
+    public ResponseEntity<Funcionario> atualizar(@PathVariable Integer id, @RequestBody Funcionario funcionario) {
+        if (!funcionarioServices.existe(id)){
+             return ResponseEntity.notFound().build();
+        }
+        Funcionario atualizado = funcionarioServices.atualizar(id, funcionario);
+        return ResponseEntity.ok(atualizado);
+    }
 // Get - LISTAR TODOS
 @GetMapping("/Listar Todos")
 public List<Funcionario> listarTodos(){

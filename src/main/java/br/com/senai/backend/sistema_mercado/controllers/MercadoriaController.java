@@ -3,10 +3,12 @@ package br.com.senai.backend.sistema_mercado.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,16 @@ public class MercadoriaController {
     @PostMapping("/Salvar")
     public Mercadoria salvar(@RequestBody Mercadoria mercadoria){
         return mercadoriaServices.cadastrar(mercadoria);
+    }
+
+    // PUT - Atualizar
+    @PutMapping("/Atualizar{id}")
+    public ResponseEntity<Mercadoria> atualizar(@PathVariable Integer id, @RequestBody Mercadoria mercadoria) {
+        if (!mercadoriaServices.existe(id)){
+             return ResponseEntity.notFound().build();
+        }
+        Mercadoria atualizado = mercadoriaServices.atualizar(id, mercadoria);
+        return ResponseEntity.ok(atualizado);
     }
 
     // Get - LISTAR TODOS

@@ -19,4 +19,7 @@ public class FuncionarioServices {
     public Funcionario recuperarPorId (Integer id){
         return funcionarioRepository.findById(id).get();
     }
+    public void remover(Integer id) { // Metodo para remover um carro pelo id
+    funcionarioRepository.deleteById(id); // delete from carro where id = ?
+    }
 }

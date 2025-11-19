@@ -19,4 +19,8 @@ public class MercadoriaServices {
     public Mercadoria recuperarPorId(Integer id){
         return mercadoriaRepository.findById(id).get();
     }
+
+     public void remover(Integer id) { // Metodo para remover um carro pelo id
+    mercadoriaRepository.deleteById(id); // delete from carro where id = ?
+    }
 }

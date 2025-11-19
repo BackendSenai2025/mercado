@@ -28,7 +28,7 @@ public Funcionario salvar(@RequestBody Funcionario funcionario){
 }
 
 // Get - LISTAR TODOS
-@GetMapping
+@GetMapping("/Listar Todos")
 public List<Funcionario> listarTodos(){
     return funcionarioServices.listarTodos();
 }

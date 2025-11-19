@@ -28,7 +28,7 @@ public class MercadoriaController {
     }
 
     // Get - LISTAR TODOS
-    @GetMapping
+    @GetMapping("/Listar Todos")
     public List<Mercadoria> listarTodos(){
         return mercadoriaServices.listarTodos();
     }

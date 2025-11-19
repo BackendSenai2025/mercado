@@ -1,5 +1,7 @@
 package br.com.senai.backend.sistema_mercado.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +27,20 @@ public Funcionario salvar(@RequestBody Funcionario funcionario){
     return funcionarioServices.cadastrar(funcionario);
 }
 
-     @GetMapping("/{id}")
-    public Funcionario buscarPorId(@PathVariable Integer id) {
+// Get - LISTAR TODOS
+@GetMapping
+public List<Funcionario> listarTodos(){
+    return funcionarioServices.listarTodos();
+}
+
+@GetMapping("/{id}")
+public Funcionario buscarPorId(@PathVariable Integer id) {
         return funcionarioServices.recuperarPorId(id);
-    }
-        // Delete - REMOVER
-    @DeleteMapping("/Delete{id}")
-    public void remover(@PathVariable Integer id){
-        funcionarioServices.remover(id);
-    } 
+}
+// Delete - REMOVER
+@DeleteMapping("/Delete{id}")
+public void remover(@PathVariable Integer id){
+    funcionarioServices.remover(id);
+} 
     
 }

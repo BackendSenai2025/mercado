@@ -1,5 +1,7 @@
 package br.com.senai.backend.sistema_mercado.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,12 @@ public class MercadoriaController {
     @PostMapping("/Salvar")
     public Mercadoria salvar(@RequestBody Mercadoria mercadoria){
         return mercadoriaServices.cadastrar(mercadoria);
+    }
+
+    // Get - LISTAR TODOS
+    @GetMapping
+    public List<Mercadoria> listarTodos(){
+        return mercadoriaServices.listarTodos();
     }
 
      @GetMapping("/{id}")

@@ -1,5 +1,7 @@
 package br.com.senai.backend.sistema_mercado.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,14 @@ public class FuncionarioServices {
         return funcionarioRepository.save(funcionario);
     }
 
+    public List<Funcionario> listarTodos() {  // Metodo para listar todos os carros
+        return funcionarioRepository.findAll(); // select * from carro
+    }
+
     public Funcionario recuperarPorId (Integer id){
         return funcionarioRepository.findById(id).get();
     }
-    public void remover(Integer id) { // Metodo para remover um carro pelo id
-    funcionarioRepository.deleteById(id); // delete from carro where id = ?
+    public void remover(Integer id) { // Metodo para remover  pelo id
+    funcionarioRepository.deleteById(id); // delete from  where id = ?
     }
 }
